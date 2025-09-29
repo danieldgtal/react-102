@@ -1,70 +1,55 @@
 .app_header {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 24px 0;
-	background: #fff;
-	box-shadow: 0 2px 8px rgba(100, 87, 249, 0.08);
-	border-radius: 12px;
-	margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #dcdcdc;
 }
 
 .app_header > form {
-	width: 100%;
-	max-width: 600px;
-	display: flex;
-	gap: 12px;
-	align-items: center;
+    width: 40%;
 }
 
 .task_input {
-	font-size: 18px;
-	font-weight: 400;
-	background: #f5f6fa;
-	color: #222;
-	border: 1px solid #e0e0e0;
-	border-radius: 8px;
-	padding: 10px 16px;
-	width: 100%;
-	transition: border 0.2s;
+    font-size: 20px;
+    font-weight: 500;
+    background: #f9f9f9;
+    color: #000;
+    border: 1px solid #dfe3e6;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    width: 100%;
 }
 
-.task_input:focus {
-	border-color: #6457f9;
-	outline: none;
+.task_input::placeholder {
+    color: #686868;
 }
 
-.task_form_button_line {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-}
-
-.task_submit {
-	font-size: 16px;
-	font-weight: 500;
-	background: linear-gradient(90deg, #6457f9 60%, #7f6afc 100%);
-	color: #fff;
-	border-radius: 8px;
-	height: 40px;
-	padding: 0 20px;
-	border: none;
-	cursor: pointer;
-	box-shadow: 0 2px 8px rgba(100, 87, 249, 0.12);
-	transition: background 0.2s;
-}
-
-.task_submit:hover {
-	background: linear-gradient(90deg, #7f6afc 60%, #6457f9 100%);
+.task_form_bottom_line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .task_status {
-	font-size: 15px;
-	font-weight: 400;
-	border: 1px solid #e0e0e0;
-	border-radius: 8px;
-	width: 120px;
-	height: 40px;
-	padding: 0 8px;
-	background: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid #999;
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    padding: 0 5px;
+}
+
+.task_submit {
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #6457f9;
+    color: #fff;
+    border-radius: 5px;
+    height: 40px;
+    padding: 3px 13px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
 }

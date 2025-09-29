@@ -1,79 +1,106 @@
 import React, { useState } from "react";
-import Tag from "./Tag.jsx";
+
 import "./TaskForm.css";
+import Tag from "./Tag";
 
-const TaskForm = () => {
-	const [taskData, setTaskData] = useState({
-		task: "",
-		status: "todo",
-		tags: [], // Initialize tags as an empty array
-	});
+const TaskForm = ({ setTasks }) => {
+    const [taskData, setTaskData] = useState({
+        task: "",
+        status: "todo",
+        tags: [],
+    });
 
-	const selectTag = (tag) => {
-		if (taskData.tags.some((item) => item === tag)) {
-			const filteredTags = taskData.tags.filter((item) => item !== tag); // Remove tag if it already exists
-			setTaskData((prev) => {
-				return { ...prev, tags: filteredTags };
-			});
-		} else {
-			setTaskData((prev) => {
-				return { ...prev, tags: [...prev.tags, tag] }; // Add new tag
-			});
-		}
-	};
+    const checkTag = (tag) => {
+        return taskData.tags.some((item) => item === tag);
+    };
 
-	const handlechange = (e) => {
-		const { name, value } = e.target; // object destructuring to get name and value from event target
+    const selectTag = (tag) => {
+        if (taskData.tags.some((item) => item === tag)) {
+            const filterTags = taskData.tags.filter((item) => item !== tag);
+            setTaskData((prev) => {
+                return { ...prev, tags: filterTags };
+            });
+        } else {
+            setTaskData((prev) => {
+                return { ...prev, tags: [...prev.tags, tag] };
+            });
+        }
+    };
 
-		setTaskData((prev) => {
-			return { ...prev, [name]: value }; // dynamic key in object
-		});
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
-		console.log(name, value);
-	};
+        setTaskData((prev) => {
+            return { ...prev, [name]: value };
+        });
+    };
 
-	console.log("selectTag function:", selectTag); // Add this line
-	console.log("typeof selectTag:", typeof selectTag); // Add this line
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(taskData);
+        setTasks((prev) => {
+            return [...prev, taskData];
+        });
+        setTaskData({
+            task: "",
+            status: "todo",
+            tags: [],
+        });
+    };
+    return (
+        <header className='app_header'>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    name='task'
+                    value={taskData.task}
+                    className='task_input'
+                    placeholder='Enter your task'
+                    onChange={handleChange}
+                />
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(taskData);
-	};
+                <div className='task_form_bottom_line'>
+                    <div>
+                        <Tag
+                            tagName='HTML'
+                            selectTag={selectTag}
+                            selected={checkTag("HTML")}
+                        />
+                        <Tag
+                            tagName='CSS'
+                            selectTag={selectTag}
+                            selected={checkTag("CSS")}
+                        />
+                        <Tag
+                            tagName='JavaScript'
+                            selectTag={selectTag}
+                            selected={checkTag("JavaScript")}
+                        />
+                        <Tag
+                            tagName='React'
+                            selectTag={selectTag}
+                            selected={checkTag("React")}
+                        />
+                    </div>
 
-	return (
-		<header className="app_header">
-			<form onSubmit={handleSubmit} id="task_form">
-				<input
-					name="task"
-					className="task_input"
-					type="text"
-					placeholder="Add a new task..."
-					onChange={handlechange}
-					id="task_input"
-				/>
-				<select
-					className="task_status"
-					name="status"
-					id="status_select"
-					onChange={handlechange}
-				>
-					<option value="todo">To Do</option>
-					<option value="inprogress">In Progress</option>
-					<option value="done">Done</option>
-				</select>
-
-				<button className="task_submit" type="submit">
-					Add Task
-				</button>
-			</form>
-			<div>
-				<Tag tagName="HTML" selectTag={selectTag} />
-				<Tag tagName="CSS" selectTag={selectTag} />
-				<Tag tagName="JavaScript" selectTag={selectTag} />
-				<Tag tagName="React" selectTag={selectTag} />
-			</div>
-		</header>
-	);
+                    <div>
+                        <select
+                            name='status'
+                            value={taskData.status}
+                            className='task_status'
+                            onChange={handleChange}>
+                            <option value='todo'>To do</option>
+                            <option value='doing'>Doing</option>
+                            <option value='done'>Done</option>
+                        </select>
+                        <button type='submit' className='task_submit'>
+                            + Add Task
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </header>
+    );
 };
 
 export default TaskForm;

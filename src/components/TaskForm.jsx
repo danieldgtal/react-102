@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Tag from "./tag";
+import Tag from "./Tag.jsx";
 import "./TaskForm.css";
 
 const TaskForm = () => {
@@ -31,6 +31,9 @@ const TaskForm = () => {
 
 		console.log(name, value);
 	};
+
+	console.log("selectTag function:", selectTag); // Add this line
+	console.log("typeof selectTag:", typeof selectTag); // Add this line
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
